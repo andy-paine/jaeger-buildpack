@@ -11,7 +11,7 @@ IDX=$4
 if ! [ -f $CACHE_DIR/jaeger.tgz ]; then
   echo "Downloading Jaeger"
   curl --progress-bar -L https://github.com/jaegertracing/jaeger/releases/download/v1.17.1/jaeger-1.17.1-linux-amd64.tar.gz -o $CACHE_DIR/jaeger.tgz
-  tar -xf $CACHE_DIR/jaeger.tgz --strip 1 --directory $DEPS_DIR/$IDX/bin/ 'jaeger-*/jaeger-agent'
+  tar -xf $CACHE_DIR/jaeger.tgz --wildcards --strip 1 --directory $DEPS_DIR/$IDX/bin/ 'jaeger-*/jaeger-agent'
 fi
 
 echo "-----> Done."
