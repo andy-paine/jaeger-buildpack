@@ -8,6 +8,7 @@ CACHE_DIR=$2
 DEPS_DIR=$3
 IDX=$4
 
+mkdir -p $DEPS_DIR/$IDX/bin
 if ! [ -f $CACHE_DIR/jaeger.tgz ]; then
   echo "Downloading Jaeger"
   curl --progress-bar -L https://github.com/jaegertracing/jaeger/releases/download/v1.17.1/jaeger-1.17.1-linux-amd64.tar.gz -o $CACHE_DIR/jaeger.tgz
