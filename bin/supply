@@ -9,13 +9,11 @@ DEPS_DIR=$3
 IDX=$4
 
 mkdir -p $DEPS_DIR/$IDX/bin
-if ! [ -f $CACHE_DIR/jaeger.tgz ]; then
-  echo "Downloading Jaeger"
-  curl --progress-bar -L https://github.com/jaegertracing/jaeger/releases/download/v1.17.1/jaeger-1.17.1-linux-amd64.tar.gz -o $CACHE_DIR/jaeger.tgz
-  tar -xf $CACHE_DIR/jaeger.tgz --wildcards --strip 1 --directory $DEPS_DIR/$IDX/bin/ 'jaeger-*/jaeger-agent'
-fi
+echo "Downloading Jaeger"
+curl --progress-bar -L https://github.com/jaegertracing/jaeger/releases/download/v1.17.1/jaeger-1.17.1-linux-amd64.tar.gz -o jaeger.tgz
+tar -xf jaeger.tgz --wildcards --strip 1 --directory $DEPS_DIR/$IDX/bin/ 'jaeger-*/jaeger-agent'
 
-if [[ -z "${RUN_JAEGER_AGENT_AS_SIDECAR}" ]]; then
+if [[ -n "${RUN_JAEGER_AGENT_AS_SIDECAR}" ]]; then
 cat > $DEPS_DIR/$IDX/launch.yml <<EOF
 processes:
 - type: jaeger-agent
