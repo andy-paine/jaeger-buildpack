@@ -15,5 +15,14 @@ if ! [ -f $CACHE_DIR/jaeger.tgz ]; then
   tar -xf $CACHE_DIR/jaeger.tgz --wildcards --strip 1 --directory $DEPS_DIR/$IDX/bin/ 'jaeger-*/jaeger-agent'
 fi
 
+cat > $DEPS_DIR/$IDX/launch.yml <<EOF
+processes:
+- type: jaeger-agent
+  command: jaeger-agent
+  platforms:
+    cloudfoundry:
+      sidecar_for: [web]
+EOF
+
 echo "-----> Done."
 exit 0
