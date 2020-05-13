@@ -1,0 +1,19 @@
+#!/bin/bash
+# bin/compile <build-dir> <cache-dir>
+
+set -ex
+
+APP_DIR=$1
+CACHE_DIR=$2
+DEPS_DIR=$3
+IDX=$4
+
+if ! [ -f $CACHE_DIR/jaeger.tgz ]; then
+  echo "Downloading Jaeger"
+  curl -L https://github.com/jaegertracing/jaeger/releases/download/v1.17.1/jaeger-1.17.1-linux-amd64.tar.gz -o $CACHE_DIR/jaeger.tgz
+  tar -xvf $CACHE_DIR/jaeger.tgz
+fi
+cp $CACHE_DIR/jaeger-agent $DEPS_DIR/$IDX/bin/
+
+echo "-----> Done."
+exit 0
