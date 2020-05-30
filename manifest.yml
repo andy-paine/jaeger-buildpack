@@ -1,0 +1,18 @@
+---
+language: jaeger
+dependencies:
+- name: jaeger
+  version: 1.18.0
+  uri: https://github.com/jaegertracing/jaeger/releases/download/v1.18.0/jaeger-1.18.0-linux-amd64.tar.gz
+  sha256: a8899856872c127d4938c2bb8a46d2c43b4e244c1b2b949f4827cb97dc3c59ca
+  cf_stacks:
+  - cflinuxfs3
+
+include_files:
+  - README.md
+  - VERSION
+  - manifest.yml
+  - bin/detect
+  - bin/supply
+  - bin/finalize
+  - bin/release
